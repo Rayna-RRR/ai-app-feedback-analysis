@@ -6,6 +6,8 @@
 
 项目定位为**分析项目 + 方法沉淀**：重点展示从原始评论到结构化产品结论的完整分析流程，以及可复用的标注口径和 QA 检查机制。本项目同时作为 [Feedback Triage Agent](https://github.com/Rayna-RRR/feedback-triage-agent) 的数据基础和分类口径来源——人工完成全流程标注与分析约需 1 小时，这一成本是后续工具化的直接动因。
 
+**整合入口：**[工作台完整数据、QA 与复现说明](https://github.com/Rayna-RRR/feedback-triage-agent/blob/main/docs/ai_app_feedback/README.md) · [使用教程](https://github.com/Rayna-RRR/feedback-triage-agent/blob/0397271159926597a01b1fff5b640c76bb369090/docs/usage.md)
+
 ## 项目背景
 
 AI 应用的用户反馈同时包含通用体验问题和 AI 特有体验问题：既有卡顿、入口难找、会员限制说明不清楚，也有回答不准、幻觉、上下文记忆差、指令跟随差、生成质量不稳定等信号。
@@ -83,13 +85,18 @@ AI 应用的用户反馈同时包含通用体验问题和 AI 特有体验问题�
 - P0 高优先级问题 **4 条**，涉及事实误导、幻觉、内容丢失和闪退
 - 正向样本显示用户认可长上下文、复杂任务处理、代码辅助和情绪价值
 
-## 与 Feedback Triage Agent 的关系
+## 与 AI 发版反馈风险工作台的关系
 
-本项目是 [Feedback Triage Agent](https://github.com/Rayna-RRR/feedback-triage-agent) 的前置项目：
+本项目的完整数据、标注、QA 和复现脚本已整合进 [AI 发版反馈风险工作台（feedback-triage-agent）](https://github.com/Rayna-RRR/feedback-triage-agent)，不只迁入五字段测试输入：
 
-- `data/clean_reviews.csv` 的 30 条样本作为 Agent 的测试数据
-- 本项目沉淀的问题分类体系和优先级口径，直接用于 Agent 的规则设计
-- 人工全流程约 1 小时的处理成本，是工具化的直接动因
+- 原始 30 条评论、14 字段完整标注及 5 条排除样本保存在工作台 `data/ai_app_feedback/`；`data/ai_app_reviews.csv` 只是兼容输入。
+- 编码指南、原分析报告和人工 QA 保存在 `docs/ai_app_feedback/source/`；自动 QA 单独输出，不覆盖原人工理由和历史标签。
+- 原脚本作为来源快照保留在 `scripts/ai_app_feedback_source/`；工作台顶层 `scripts/prepare_ai_app_reviews.py`、`scripts/label_quality_check.py` 和 `scripts/summarize_reviews.py` 提供可直接运行的准备、QA 与汇总流程。
+- 分类体系和优先级口径继续作为规则设计的来源；系统结果与原人工标签并列对照，不覆盖原标签。人工全流程约 1 小时的处理成本仍是工具化的直接动因。
+
+入口：[完整资料、来源映射与复现命令](https://github.com/Rayna-RRR/feedback-triage-agent/blob/main/docs/ai_app_feedback/README.md) · [工作台使用教程](https://github.com/Rayna-RRR/feedback-triage-agent/blob/0397271159926597a01b1fff5b640c76bb369090/docs/usage.md) · [线上临时预览](https://feedback-triage-agent.vercel.app/demo)。
+
+本仓库继续保留原始资料、原分析和历史标签，作为来源与方法记录。公开评论缺少完整版本和观察窗口，只用于单批次分诊与方法展示，不能补造版本或时间用于发版前后比较。完整操作请按教程在本地进行；线上不保证任务读取或保存。
 
 ## 项目结构
 
